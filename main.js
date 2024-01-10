@@ -27,6 +27,7 @@ class OmniParser {
 	}
 
 	async parse(input, options = {}) {
+		if (input == null) { input = "" }
 		if (input.startsWith("http")) {
 			var res = null
 
