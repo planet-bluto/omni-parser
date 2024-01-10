@@ -32,10 +32,12 @@ async function listFunc(input, lazy = false) {
 		}
 	})
 
+	// print(newTracks)
+
 	return listBuilder(
 		playlist_obj.title,
-		playlist_obj.author.name,
-		(`https://www.youtube.com/channel/${playlist_obj.author.channelID}`),
+		(playlist_obj.author?.name || "Auto-Generated"),
+		(playlist_obj.author ? `https://www.youtube.com/channel/${playlist_obj.author.channelID}` : null),
 		newTracks,
 		playlist_obj.url,
 		playlist_obj.bestThumbnail.url,
