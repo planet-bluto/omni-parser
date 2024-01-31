@@ -118,7 +118,7 @@ async function determine(input, options = {}) {
 
 async function multiple(ids) {
 	// ids = ids.map(id => Number(id))
-	print(ids)
+	// print(ids)
 	var res = await SoundCloud.tracks.getTracksByIds(ids)
 	res = res.map(trackObj => {
 		return trackBuilder(
