@@ -67,7 +67,7 @@ class OmniParser {
 			if (!Array.isArray(service_res[service_code])) { service_res[service_code] = [] }
 
 			service_res[service_code].push({ind, id: service_id})
-			super_res.push(null)
+			// super_res.push(null)
 		})
 
 		await Object.keys(service_res).awaitForEach(async service_code => {
@@ -84,9 +84,16 @@ class OmniParser {
 
 			res.forEach(trackObj => {
 				var thisEntry = service_res[service_code].find(entry => entry.id == trackObj.service.id)
-				super_res[thisEntry.ind] = trackObj
+				thisEntry.track = trackObj
+				super_res.push(thisEntry)
 			})
 		})
+
+		super_res.sort((a, b) => {
+			return a.ind - b.ind
+		})
+
+		super_res = super_res.map(entry => entry.track)
 
 		return super_res
 	}
