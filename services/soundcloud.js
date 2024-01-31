@@ -11,24 +11,36 @@ async function trackFunc(input, uses_id = false) {
 	var res = null
 
 	if (!uses_id) {
-		res = await SoundCloud.tracks.getTrack(input)
+		try {
+			res = await SoundCloud.tracks.getTrack(input)
+		} catch(err) {
+			res = null
+		}
 		// print(res)
 	} else {
-		var thisRes = await SoundCloud.tracks.getTracksByIds([input])
-		res = thisRes[0]
+		try {
+			var thisRes = await SoundCloud.tracks.getTracksByIds([input])
+			res = thisRes[0]
+		} catch(err) {
+			res = null
+		}
 	}
 
-	return trackBuilder(
-		res.title,
-		res.user.username,
-		res.user.permalink_url,
-		res.permalink_url,
-		(res.artwork_url || res.user.avatar_url).replace("-large.jpg", "-t500x500.jpg"),
-		res.id,
-		meta,
-		res.description,
-		res.likes_count
-	)
+	if (res != null) {
+		return trackBuilder(
+			res.title,
+			res.user.username,
+			res.user.permalink_url,
+			res.permalink_url,
+			(res.artwork_url || res.user.avatar_url).replace("-large.jpg", "-t500x500.jpg"),
+			res.id,
+			meta,
+			res.description,
+			res.likes_count
+		)
+	} else {
+		return null
+	}
 }
 
 async function listFunc(input, lazy = false) {
