@@ -3,7 +3,7 @@ const meta = {name: "Soundcloud", code: "SC"}
 const print = console.log
 var fetch = require('node-fetch')
 var SoundCloud = require("scdl-core").SoundCloud
-SoundCloud.clientId = (process.env["SC_CLIENT_ID"] || "dqwdwj3BlsZDKZthzNTXY7sRXIv8eNst")
+SoundCloud.clientId = (process.env["SC_CLIENT_ID"] || "zy0ijES9ACCAxntrQj4MN4wKRlluii0I")
 
 var {trackBuilder, listBuilder} = require("../builders.js")
 
@@ -62,7 +62,7 @@ async function listFunc(input, lazy = false) {
 				trackObj.description,
 				trackObj.likes_count
 			)
-			
+
 			if (thisTrack != null) {
 				if (index == 0 && image == null) {
 					image = thisTrack.image
@@ -116,9 +116,31 @@ async function determine(input, options = {}) {
 	}
 }
 
+async function multiple(ids) {
+	// ids = ids.map(id => Number(id))
+	print(ids)
+	var res = await SoundCloud.tracks.getTracksByIds(ids)
+	res = res.map(trackObj => {
+		return trackBuilder(
+			trackObj.title,
+			trackObj.user.username,
+			trackObj.user.permalink_url,
+			trackObj.permalink_url,
+			(trackObj.artwork_url || trackObj.user.avatar_url).replace("-large.jpg", "-t500x500.jpg"),
+			trackObj.id,
+			meta,
+			trackObj.description,
+			trackObj.likes_count
+		)
+	})
+
+	return res
+}
+
 module.exports = {
-	meta: meta,
-	trackFunc: trackFunc,
-	listFunc: listFunc,
-	determine: determine,
+	meta,
+	trackFunc,
+	listFunc,
+	determine,
+	multiple,
 }
