@@ -14,6 +14,7 @@ async function trackFunc(input, uses_id = false) {
 		try {
 			res = await SoundCloud.tracks.getTrack(input)
 		} catch(err) {
+			print("Not real... ", input)
 			res = null
 		}
 		// print(res)
@@ -22,6 +23,7 @@ async function trackFunc(input, uses_id = false) {
 			var thisRes = await SoundCloud.tracks.getTracksByIds([input])
 			res = thisRes[0]
 		} catch(err) {
+			print("Not real... ", input)
 			res = null
 		}
 	}
@@ -50,18 +52,24 @@ async function listFunc(input, lazy = false) {
 	var newTracks = await res.tracks.awaitForEach(async (trackObj, index) => {
 		if (!lazy) {
 			var thisTrack = await trackFunc(trackObj.id, true)
-			if (index == 0 && image == null) {
-				image = thisTrack.image
+			if (thisTrack != null) {
+				if (index == 0 && image == null) {
+					image = thisTrack.image
+				}
+				return thisTrack
 			}
-			return thisTrack
 		} else {
 			if (index == 0 && image == null) {
 				var thisTrack = await trackFunc(trackObj.id, true)
-				image = thisTrack.image
+				if (thisTrack != null) {
+					image = thisTrack.image
+				}
 			}
 			return (`SC_${trackObj.id}`)
 		}
 	})
+
+	newTracks = newTracks.filter(track => track != null)
 
 	return listBuilder(
 		res.title,
