@@ -120,6 +120,9 @@ async function multiple(ids) {
 	// ids = ids.map(id => Number(id))
 	// print(ids)
 	var res = await SoundCloud.tracks.getTracksByIds(ids)
+	res.sort((a, b) => {
+		return (ids.indexOf(a.id) - ids.indexOf(b.id))
+	})
 	res = res.map(trackObj => {
 		return trackBuilder(
 			trackObj.title,
