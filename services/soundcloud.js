@@ -51,7 +51,18 @@ async function listFunc(input, lazy = false) {
 
 	var newTracks = await res.tracks.awaitForEach(async (trackObj, index) => {
 		if (!lazy) {
-			var thisTrack = await trackFunc(trackObj.id, true)
+			var thisTrack = trackBuilder(
+				trackObj.title,
+				trackObj.user.username,
+				trackObj.user.permalink_url,
+				trackObj.permalink_url,
+				(trackObj.artwork_url || trackObj.user.avatar_url).replace("-large.jpg", "-t500x500.jpg"),
+				trackObj.id,
+				meta,
+				trackObj.description,
+				trackObj.likes_count
+			)
+			
 			if (thisTrack != null) {
 				if (index == 0 && image == null) {
 					image = thisTrack.image
