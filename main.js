@@ -84,8 +84,7 @@ class OmniParser {
 
 			res.forEach(trackObj => {
 				var thisEntry = service_res[service_code].find(entry => entry.id == trackObj.service.id)
-				thisEntry.track = trackObj
-				super_res[thisEntry.ind] = thisEntry
+				super_res[thisEntry.ind] = trackObj
 			})
 		})
 
