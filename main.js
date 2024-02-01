@@ -77,7 +77,7 @@ class OmniParser {
 			if (Services[service_code].multiple) {
 				res = await Services[service_code].multiple(ids)
 			} else {
-				res = ids.awaitForEach(async id => {
+				res = await ids.awaitForEach(async id => {
 					return Services[service_code].trackFunc(id)
 				})
 			}
