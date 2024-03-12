@@ -47,6 +47,7 @@ async function trackFunc(input, uses_id = false) {
 
 async function listFunc(input, lazy = false) {
 	var res = await SoundCloud.playlists.getPlaylist(input)
+
 	var image = res.artwork_url
 
 	var newTracks = await res.tracks.awaitForEach(async (trackObj, index) => {

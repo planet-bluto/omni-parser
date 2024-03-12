@@ -74,15 +74,15 @@ class OmniParser {
 
 				if (reses.type == "track") { reses = [reses] }
 				else if (reses.type == "list") { reses = reses.tracks }
-
-				reses.forEach(res => {
+ 
+				reses.forEach((res, inner_ind) => {
 					var idBits = res.split("_")
 					var service_code = idBits.shift()
 					var service_id = idBits.join("_")
 
 					if (!Array.isArray(service_res[service_code])) { service_res[service_code] = [] }
 
-					service_res[service_code].push({ind, id: service_id})
+					service_res[service_code].push({ind: (ind + ((1 / reses.length) * inner_ind)), id: service_id})
 				})
 			}
 		})

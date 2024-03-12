@@ -1,8 +1,8 @@
 Array.prototype.awaitForEach = async function(func) {
-	var proms = []
+	var proms = new Array(this.length)
 
-	this.forEach((...args) => {
-		proms.push(func(...args))
+	this.forEach((val, ind, arr) => {
+		proms[ind] = func(val, ind, arr)
 	})
 
 	return await Promise.all(proms)
