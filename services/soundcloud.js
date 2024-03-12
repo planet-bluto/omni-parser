@@ -3,7 +3,7 @@ const meta = {name: "Soundcloud", code: "SC"}
 const print = console.log
 var fetch = require('node-fetch')
 var SoundCloud = require("scdl-core").SoundCloud
-SoundCloud.clientId = (process.env["SC_CLIENT_ID"] || "zy0ijES9ACCAxntrQj4MN4wKRlluii0I")
+SoundCloud.clientId = (process.env["SC_CLIENT_ID"] || "8BBZpqUP1KSN4W6YB64xog2PX4Dw98b1")
 
 var {trackBuilder, listBuilder} = require("../builders.js")
 

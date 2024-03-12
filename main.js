@@ -59,7 +59,7 @@ class OmniParser {
 		var service_res = {}
 		var super_res = []
 
-		ids.asyncForEach(async (id, ind) => {
+		await ids.asyncForEach(async (id, ind) => {
 			if (!id.startsWith("https://")) {
 				var idBits = id.split("_")
 				var service_code = idBits.shift()
@@ -70,13 +70,15 @@ class OmniParser {
 				service_res[service_code].push({ind, id: service_id})
 			} else {
 				var reses = await this.parse(id, {lazy: true})
+				print(reses.type)
 
 				if (reses.type == "track") { reses = [reses] }
-				else if (reses.type == "track") { reses = reses.track }
+				else if (reses.type == "list") { reses = reses.tracks }
 
 				reses.forEach(res => {
-					var service_code = res.service.code
-					var service_id = res.service.id
+					var idBits = res.split("_")
+					var service_code = idBits.shift()
+					var service_id = idBits.join("_")
 
 					if (!Array.isArray(service_res[service_code])) { service_res[service_code] = [] }
 
@@ -117,6 +119,7 @@ class OmniParser {
 var {trackBuilder, listBuilder} = require("./builders.js")
 
 module.exports = {
+	SuperOmniParser: OmniParser,
 	OmniParser: (...args) => { var thisInst = new OmniParser(...args); return thisInst.parse },
 	MultiLoader: (...args) => { var thisInst = new OmniParser(...args); return thisInst.multiple },
 	registerService: registerService,
