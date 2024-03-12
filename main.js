@@ -69,7 +69,7 @@ class OmniParser {
 
 				service_res[service_code].push({ind, id: service_id})
 			} else {
-				var reses = await parse(id, {lazy: true})
+				var reses = await this.parse(id, {lazy: true})
 
 				if (reses.type == "track") { reses = [reses] }
 				else if (reses.type == "track") { reses = reses.track }
