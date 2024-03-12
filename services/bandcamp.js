@@ -17,6 +17,7 @@ async function getInfo( type, url ) {
 async function getTrackFromID( ID ) {
 	var res = await fetch(`https://bandcamp.com/api/mobile/24/tralbum_details?band_id=1&tralbum_type=t&tralbum_id=${ID}`)
 	var info = await res.json()
+	// print(info)
 	return getInfo("Track", info.bandcamp_url)
 }
 

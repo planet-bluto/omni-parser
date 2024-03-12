@@ -59,15 +59,30 @@ class OmniParser {
 		var service_res = {}
 		var super_res = []
 
-		ids.forEach((id, ind) => {
-			var idBits = id.split("_")
-			var service_code = idBits.shift()
-			var service_id = idBits.join("_")
+		ids.asyncForEach(async (id, ind) => {
+			if (!id.startsWith("https://")) {
+				var idBits = id.split("_")
+				var service_code = idBits.shift()
+				var service_id = idBits.join("_")
 
-			if (!Array.isArray(service_res[service_code])) { service_res[service_code] = [] }
+				if (!Array.isArray(service_res[service_code])) { service_res[service_code] = [] }
 
-			service_res[service_code].push({ind, id: service_id})
-			// super_res.push(null)
+				service_res[service_code].push({ind, id: service_id})
+			} else {
+				var reses = await parse(id, {lazy: true})
+
+				if (reses.type == "track") { reses = [reses] }
+				else if (reses.type == "track") { reses = reses.track }
+
+				reses.forEach(res => {
+					var service_code = res.service.code
+					var service_id = res.service.id
+
+					if (!Array.isArray(service_res[service_code])) { service_res[service_code] = [] }
+
+					service_res[service_code].push({ind, id: service_id})
+				})
+			}
 		})
 
 		await Object.keys(service_res).awaitForEach(async service_code => {
