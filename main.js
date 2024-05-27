@@ -5,7 +5,8 @@ require("./arrayLib.js")
 var Services = {
 	YT: require("./services/youtube.js"),
 	SC: require("./services/soundcloud.js"),
-	BC: require("./services/bandcamp.js")
+	BC: require("./services/bandcamp.js"),
+	SP: require("./services/spotify.js"),
 }
 
 function registerService(meta = null, trackFunc = null, listFunc = null, determine = null) {
