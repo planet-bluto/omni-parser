@@ -25,7 +25,7 @@ async function trackFunc(input, uses_id = false) {
 	var image = null
 	var info = null
 
-	if (!uses_id) {
+	if (!uses_id && input.startsWith("http")) {
 		info = await getInfo("Track", input)
 	} else {
 		info = await getTrackFromID(input)
