@@ -19,8 +19,9 @@
   "author": "PlanetBluto",
   "license": "ISC",
   "dependencies": {
-    "node-fetch": "^2.7.0",
+    "@distube/ytdl-core": "^4.15.1",
     "bandcamp-scraper": "^1.5.0",
+    "node-fetch": "^2.7.0",
     "scdl-core": "^1.1.0",
     "ytdl-core": "^4.11.5",
     "ytpl": "^2.3.0"

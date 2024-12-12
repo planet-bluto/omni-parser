@@ -28,6 +28,8 @@ async function trackFunc(input, uses_id = false) {
 		}
 	}
 
+	if (res.user == null) { res = null }
+	
 	if (res != null) {
 		return trackBuilder(
 			res.title,

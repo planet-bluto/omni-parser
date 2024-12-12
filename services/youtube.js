@@ -1,7 +1,7 @@
 const meta = {name: "YouTube", code: "YT"}
 
 const print = console.log
-const ytdl = require('ytdl-core')
+const ytdl = require('@distube/ytdl-core')
 const ytpl = require('ytpl')
 
 var {trackBuilder, listBuilder} = require("../builders.js")
