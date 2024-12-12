@@ -6,7 +6,7 @@ const ytpl = require('ytpl')
 
 var {trackBuilder, listBuilder} = require("../builders.js")
 
-async function trackFunc(input) {
+async function trackFunc(input, _uses_id = false) {
 	let info = await ytdl.getInfo(input)
 	return trackBuilder(
 		info.videoDetails.title,
