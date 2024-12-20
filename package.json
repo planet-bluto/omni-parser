@@ -1,6 +1,6 @@
 {
   "name": "omni-parser",
-  "version": "2.1.61",
+  "version": "2.2.0",
   "description": "Parses links from music streaming services into parseable objects; Used for Omni but is also modular",
   "main": "main.js",
   "scripts": {
@@ -19,7 +19,7 @@
   "author": "PlanetBluto",
   "license": "ISC",
   "dependencies": {
-    "@distube/ytdl-core": "^4.15.1",
+    "@distube/ytdl-core": "^4.15.8",
     "bandcamp-scraper": "^1.5.0",
     "node-fetch": "^2.7.0",
     "scdl-core": "^1.1.0",
