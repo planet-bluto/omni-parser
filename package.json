@@ -20,6 +20,7 @@
   "license": "ISC",
   "dependencies": {
     "@distube/ytdl-core": "^4.15.8",
+    "@distube/ytpl": "^1.2.3",
     "bandcamp-scraper": "^1.5.0",
     "node-fetch": "^2.7.0",
     "scdl-core": "^1.1.0",
